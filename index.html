@@ -1,0 +1,2179 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Agency | Site pe Abonament</title>
+    <meta
+      name="description"
+      content="Site pentru afacerea ta, fara cost initial. Platesti doar un abonament lunar si noi ne ocupam de tot."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --line: #e2e8f0;
+        --card: #f8fafc;
+        --accent: #2563eb;
+        --accent-strong: #1d4ed8;
+      }
+
+      body.dark {
+        --bg: #0b1220;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --line: #1e293b;
+        --card: #0f172a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Jost", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.5;
+        overflow-x: hidden;
+      }
+
+      .container {
+        width: min(1140px, 92%);
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 84px 0;
+      }
+
+      .section,
+      .hero,
+      .cta {
+        animation: fade-up 0.7s ease both;
+      }
+
+      @keyframes fade-up {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0 0 12px;
+        line-height: 1.18;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 4vw, 3.6rem);
+        font-weight: 800;
+        max-width: 700px;
+      }
+
+      h2 {
+        font-size: clamp(1.5rem, 3vw, 2.3rem);
+        font-weight: 700;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .eyebrow {
+        display: inline-block;
+        color: var(--accent);
+        background: #eff6ff;
+        border: 1px solid #dbeafe;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .btn {
+        border: 0;
+        border-radius: 12px;
+        padding: 14px 22px;
+        font-size: 0.98rem;
+        font-weight: 700;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.2s ease;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .btn-primary:hover {
+        background: var(--accent-strong);
+        transform: translateY(-1px);
+      }
+
+      .btn-outline {
+        border: 1px solid var(--line);
+        background: #fff;
+        color: var(--text);
+      }
+
+      .btn-outline:hover {
+        border-color: #cbd5e1;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 251, 255, 0.96) 100%);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid #e9eef5;
+      }
+
+      .nav {
+        height: 78px;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .brand {
+        justify-self: start;
+        font-size: 1.08rem;
+        font-weight: 800;
+        letter-spacing: 0.4px;
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      .brand span {
+        color: var(--accent);
+      }
+
+      .nav-links {
+        justify-self: center;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 6px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      }
+
+      .nav-links a {
+        color: #475569;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 700;
+        border-radius: 8px;
+        padding: 8px 14px;
+        transition: 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        color: #0f172a;
+        background: #f1f5f9;
+      }
+
+      .nav-cta {
+        justify-self: end;
+      }
+
+      .top-actions {
+        justify-self: end;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .hamburger {
+        display: none;
+        width: 38px;
+        height: 38px;
+        border-radius: 9px;
+        border: 1px solid #cbd5e1;
+        background: #fff;
+        color: #0f172a;
+        font-size: 1.1rem;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mobile-menu {
+        position: fixed;
+        inset: 0;
+        z-index: 120;
+        display: none;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 84px;
+      }
+
+      .mobile-menu.open {
+        display: flex;
+      }
+
+      .mobile-menu-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.5);
+        backdrop-filter: blur(2px);
+      }
+
+      .mobile-menu-panel {
+        position: relative;
+        width: min(520px, 92%);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        box-shadow: 0 22px 40px rgba(15, 23, 42, 0.22);
+        padding: 14px;
+      }
+
+      .mobile-menu .container {
+        display: grid;
+        gap: 10px;
+        padding: 0;
+      }
+
+      .mobile-menu a {
+        text-decoration: none;
+        color: #1e293b;
+        font-weight: 700;
+        border: 1px solid transparent;
+        border-radius: 12px;
+        padding: 12px 14px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+      }
+
+      .mobile-menu a:hover {
+        background: #eff6ff;
+        border-color: #bfdbfe;
+        transform: translateX(2px);
+      }
+
+      .mobile-menu a.mobile-cta {
+        margin-top: 6px;
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+        box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+      }
+
+      .mobile-menu a.mobile-cta::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1px;
+        background: #dbeafe;
+        margin: -6px 0 10px;
+      }
+
+      .mobile-menu a.mobile-cta:hover {
+        background: var(--accent-strong);
+        border-color: var(--accent-strong);
+      }
+
+      .theme-toggle {
+        width: 58px;
+        height: 32px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        border-radius: 999px;
+        padding: 0;
+        cursor: pointer;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      body.dark .theme-toggle {
+        border-color: #334155;
+        background: #0f172a;
+      }
+
+      .theme-toggle-thumb {
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: #e2e8f0;
+        border: 1px solid #cbd5e1;
+        margin-left: 3px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        transform: translateX(0);
+        transition: transform 0.22s ease;
+      }
+
+      .theme-toggle .icon-moon {
+        display: inline;
+      }
+
+      .theme-toggle .icon-sun {
+        display: none;
+      }
+
+      body.dark .theme-toggle-thumb {
+        transform: translateX(26px);
+        background: #1e293b;
+        border-color: #334155;
+      }
+
+      body.dark .theme-toggle .icon-moon {
+        display: none;
+      }
+
+      body.dark .theme-toggle .icon-sun {
+        display: inline;
+      }
+
+      .nav-cta .btn {
+        padding: 12px 18px;
+        font-size: 0.9rem;
+        border-radius: 8px;
+      }
+
+      .hero {
+        padding: 68px 0 44px;
+        position: relative;
+      }
+
+      .hero-grid {
+        display: grid;
+        gap: 26px;
+        grid-template-columns: 1.15fr 0.85fr;
+        align-items: start;
+      }
+
+      .hero-sub {
+        display: block;
+        font-size: 1.08rem;
+        margin-bottom: 24px;
+        max-width: 520px;
+        color: #475569;
+        font-weight: 500;
+        letter-spacing: 0.1px;
+      }
+
+      .hero::before,
+      .hero::after {
+        content: "";
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        border-radius: 999px;
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, rgba(37, 99, 235, 0) 70%);
+        pointer-events: none;
+        z-index: 0;
+        animation: float-soft 8s ease-in-out infinite;
+      }
+
+      .hero::before {
+        top: -90px;
+        right: 4%;
+      }
+
+      .hero::after {
+        bottom: -120px;
+        left: 2%;
+        animation-delay: -3s;
+      }
+
+      @keyframes float-soft {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .hero-grid,
+      .logos {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .mini-trust {
+        margin-top: 20px;
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .mini-trust span {
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+
+      .hero-card {
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 22px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06);
+        animation: card-float 5s ease-in-out infinite;
+      }
+
+      @keyframes card-float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-4px);
+        }
+      }
+
+      .hero-card h3 {
+        margin-bottom: 14px;
+      }
+
+      .hero-points {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 10px;
+      }
+
+      .hero-points li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px 12px;
+        border: 1px solid #dbeafe;
+        border-radius: 12px;
+        background: #fff;
+      }
+
+      .hero-points li::before {
+        content: "";
+        width: 16px;
+        height: 16px;
+        margin-top: 3px;
+        border-radius: 999px;
+        flex: 0 0 16px;
+        background: radial-gradient(circle at 35% 35%, #60a5fa 0%, #2563eb 70%);
+        box-shadow: inset 0 0 0 3px #dbeafe;
+      }
+
+      .hero-points strong {
+        display: block;
+        font-size: 1rem;
+        margin-bottom: 1px;
+      }
+
+      .hero-points span {
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .logos {
+        margin-top: 36px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 10px 0 12px;
+        overflow: hidden;
+        background: #fff;
+        position: relative;
+      }
+
+      .logos::before,
+      .logos::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 34px;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .logos::before {
+        left: 0;
+        background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+      }
+
+      .logos::after {
+        right: 0;
+        background: linear-gradient(270deg, #ffffff 0%, rgba(255, 255, 255, 0) 100%);
+      }
+
+      .logos-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-left: 12px;
+        margin-bottom: 8px;
+        z-index: 3;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.25px;
+        color: #475569;
+        background: #f8fbff;
+        border: 1px solid #dbeafe;
+        border-radius: 999px;
+        padding: 3px 9px;
+      }
+
+      .logos-label::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: #2563eb;
+      }
+
+      .logos-track {
+        display: flex;
+        width: max-content;
+        gap: 26px;
+        padding-inline: 18px;
+        color: #94a3b8;
+        font-weight: 700;
+        white-space: nowrap;
+        animation: logos-scroll 16s linear infinite;
+      }
+
+      .logos:hover .logos-track {
+        animation-play-state: paused;
+      }
+
+      @keyframes logos-scroll {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      .grid-4,
+      .grid-3 {
+        display: grid;
+        gap: 16px;
+      }
+
+      .grid-4 {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--card);
+        padding: 20px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+      }
+
+      .card:hover {
+        border-color: #cdd8e8;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06);
+      }
+
+      .benefit {
+        text-align: left;
+        font-weight: 700;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .benefit:hover {
+        transform: translateY(-3px);
+        border-color: #bfdbfe;
+        box-shadow: 0 10px 22px rgba(37, 99, 235, 0.08);
+      }
+
+      .benefit-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 12px;
+        background: #eaf2ff;
+        color: #1d4ed8;
+        font-size: 0.95rem;
+        font-weight: 800;
+      }
+
+      .benefit p {
+        margin: 0;
+      }
+
+      .benefit-sub {
+        margin-top: 5px;
+        font-size: 0.88rem;
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .step {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        border: 1px solid #dbeafe;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .step:hover {
+        transform: translateY(-3px);
+        border-color: #93c5fd;
+      }
+
+      .step::after {
+        content: "";
+        position: absolute;
+        right: -36px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        background: #eaf2ff;
+        border: 1px solid #c7ddff;
+      }
+
+      .step-number {
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.28);
+        border: 2px solid #dbeafe;
+        color: #ffffff;
+        font-size: 0.96rem;
+        line-height: 1;
+        margin-bottom: 14px;
+      }
+
+      .step h3 {
+        margin-bottom: 8px;
+      }
+
+      .step p {
+        font-size: 0.95rem;
+      }
+
+      .process-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .process-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+
+      .process-note {
+        max-width: 320px;
+        color: #64748b;
+        font-size: 0.92rem;
+        text-align: right;
+      }
+
+      .process-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: 1px solid #dbeafe;
+        background: #f8fbff;
+        color: #1d4ed8;
+        border-radius: 999px;
+        padding: 5px 10px;
+        font-size: 0.74rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .process-kicker::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: #2563eb;
+      }
+
+      .step:nth-child(3n)::after {
+        display: none;
+      }
+
+      .pricing-card {
+        position: relative;
+        background: #fff;
+        cursor: pointer;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+      }
+
+      .pricing-grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .plan-tag {
+        display: inline-flex;
+        width: fit-content;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid #dbeafe;
+        background: #f8fbff;
+        color: #1d4ed8;
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .plan-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 10px;
+        min-height: 24px;
+      }
+
+      .pricing-card:hover {
+        transform: translateY(-3px);
+      }
+
+      .pricing-card:focus-visible {
+        outline: 2px solid #93c5fd;
+        outline-offset: 2px;
+      }
+
+      .pricing-card.recommended {
+        border: 2px solid var(--accent);
+        box-shadow: 0 16px 30px rgba(37, 99, 235, 0.14);
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      }
+
+      .badge {
+        background: var(--accent);
+        color: #fff;
+        font-size: 0.74rem;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-weight: 700;
+        line-height: 1;
+      }
+
+      .price {
+        margin: 8px 0 12px;
+        font-size: 1.85rem;
+        font-weight: 800;
+        white-space: nowrap;
+        line-height: 1.1;
+      }
+
+      .price small {
+        font-size: 0.92rem;
+        color: var(--muted);
+        font-weight: 600;
+        margin-left: 4px;
+      }
+
+      .pricing-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        color: var(--muted);
+      }
+
+      .pricing-list li {
+        margin: 9px 0;
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+      }
+
+      .pricing-list li::before {
+        content: "";
+        width: 16px;
+        height: 16px;
+        margin-top: 2px;
+        border-radius: 999px;
+        flex: 0 0 16px;
+        background: radial-gradient(circle at 35% 35%, #60a5fa 0%, #2563eb 70%);
+        box-shadow: inset 0 0 0 3px #dbeafe;
+      }
+
+      .pricing-cta {
+        margin-top: auto;
+        padding-top: 12px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #1d4ed8;
+      }
+
+      .portfolio-grid {
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .portfolio-head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .portfolio-section {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .portfolio-section::before,
+      .portfolio-section::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .portfolio-section::before {
+        width: 320px;
+        height: 320px;
+        top: -120px;
+        right: -80px;
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.16) 0%, rgba(37, 99, 235, 0) 72%);
+      }
+
+      .portfolio-section::after {
+        width: 260px;
+        height: 260px;
+        bottom: -120px;
+        left: -70px;
+        background: radial-gradient(circle, rgba(148, 163, 184, 0.15) 0%, rgba(148, 163, 184, 0) 72%);
+      }
+
+      .portfolio-section .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .portfolio-section .container::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        background-image: linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+        background-size: 26px 26px;
+        mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .process-section {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .process-section::before,
+      .process-section::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .process-section::before {
+        width: 320px;
+        height: 320px;
+        top: -120px;
+        right: -80px;
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.16) 0%, rgba(37, 99, 235, 0) 72%);
+      }
+
+      .process-section::after {
+        width: 260px;
+        height: 260px;
+        bottom: -120px;
+        left: -70px;
+        background: radial-gradient(circle, rgba(148, 163, 184, 0.15) 0%, rgba(148, 163, 184, 0) 72%);
+      }
+
+      .process-section .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .process-section .container::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        background-image: linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+        background-size: 26px 26px;
+        mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .portfolio-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        border: 1px solid #dbeafe;
+        background: #f8fbff;
+        color: #1d4ed8;
+        border-radius: 999px;
+        padding: 5px 10px;
+        font-size: 0.74rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      .portfolio-kicker::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: #2563eb;
+      }
+
+      .portfolio-item {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        transition: 0.2s ease;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .portfolio-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 36px rgba(15, 23, 42, 0.12);
+      }
+
+      .portfolio-item img {
+        display: block;
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+      }
+
+      .portfolio-item p {
+        padding: 14px 16px;
+        font-weight: 700;
+      }
+
+      .portfolio-meta {
+        padding: 0 16px 16px;
+      }
+
+      .portfolio-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: #1d4ed8;
+        text-decoration: none;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      .portfolio-link:hover {
+        text-decoration: underline;
+      }
+
+      .portfolio-desc {
+        font-size: 0.9rem;
+        color: #64748b;
+      }
+
+
+      .project-modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 120;
+      }
+
+      .project-modal.open {
+        display: flex;
+      }
+
+      .project-modal.closing {
+        display: flex;
+      }
+
+      .project-modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.55);
+        backdrop-filter: blur(2px);
+        opacity: 0;
+        animation: modal-backdrop-in 0.22s ease forwards;
+      }
+
+      .project-modal.closing .project-modal-backdrop {
+        animation: modal-backdrop-out 0.2s ease forwards;
+      }
+
+      .project-modal-content {
+        position: relative;
+        width: min(760px, 92%);
+        max-height: 88vh;
+        overflow: auto;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: 0 30px 60px rgba(15, 23, 42, 0.24);
+        padding: 20px;
+        opacity: 0;
+        transform: translateY(10px) scale(0.985);
+        animation: modal-content-in 0.26s ease forwards;
+      }
+
+      .project-modal.closing .project-modal-content {
+        animation: modal-content-out 0.2s ease forwards;
+      }
+
+      @keyframes modal-backdrop-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes modal-backdrop-out {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+
+      @keyframes modal-content-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px) scale(0.985);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes modal-content-out {
+        from {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(10px) scale(0.985);
+        }
+      }
+
+      .project-modal-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        border: 1px solid #cbd5e1;
+        background: #fff;
+        color: #0f172a;
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        line-height: 1;
+      }
+
+      .project-modal-image {
+        width: min(320px, 100%);
+        height: auto;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        margin: 0 auto 14px;
+        display: block;
+      }
+
+      .project-modal-list {
+        margin: 10px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 8px;
+      }
+
+      .project-modal-list li {
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+      }
+
+      .project-modal-list li::before {
+        content: "";
+        width: 14px;
+        height: 14px;
+        margin-top: 3px;
+        border-radius: 999px;
+        flex: 0 0 14px;
+        background: radial-gradient(circle at 35% 35%, #60a5fa 0%, #2563eb 70%);
+        box-shadow: inset 0 0 0 3px #dbeafe;
+      }
+
+      .project-link {
+        margin-top: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #1d4ed8;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .project-link:hover {
+        text-decoration: underline;
+      }
+
+      .success-modal {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 130;
+      }
+
+      .success-modal.open {
+        display: flex;
+      }
+
+      .success-modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.55);
+        backdrop-filter: blur(2px);
+      }
+
+      .success-modal-card {
+        position: relative;
+        width: min(520px, 92%);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        box-shadow: 0 24px 50px rgba(15, 23, 42, 0.25);
+        padding: 24px;
+        text-align: center;
+        animation: modal-content-in 0.24s ease forwards;
+      }
+
+      .success-check {
+        width: 46px;
+        height: 46px;
+        margin: 0 auto 12px;
+        border-radius: 999px;
+        background: #dbeafe;
+        color: #1d4ed8;
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+      }
+
+      .why-box {
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        border-left: 4px solid #dbeafe;
+      }
+
+      .why-box p {
+        font-size: 1rem;
+      }
+
+      .why-steps {
+        margin: 14px 0 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 10px;
+      }
+
+      .why-steps li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .why-steps li::before {
+        content: "";
+        width: 18px;
+        height: 18px;
+        margin-top: 2px;
+        flex: 0 0 18px;
+        border-radius: 999px;
+        background: radial-gradient(circle at 35% 35%, #60a5fa 0%, #2563eb 70%);
+        box-shadow: inset 0 0 0 3px #dbeafe;
+      }
+
+      .faq {
+        display: grid;
+        gap: 12px;
+      }
+
+      details {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px 16px;
+        background: #fff;
+      }
+
+      summary {
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      .cta {
+        padding: 88px 0 100px;
+      }
+
+      .cta-box {
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 30px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+        display: grid;
+        gap: 24px;
+        grid-template-columns: 1.05fr 0.95fr;
+        box-shadow: 0 18px 35px rgba(15, 23, 42, 0.06);
+      }
+
+      .form {
+        display: grid;
+        gap: 10px;
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .input {
+        width: 100%;
+        border: 1px solid #cbd5e1;
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 0.95rem;
+        font-family: inherit;
+      }
+
+      .input:focus {
+        outline: 2px solid #bfdbfe;
+        border-color: #93c5fd;
+        box-shadow: 0 0 0 3px rgba(191, 219, 254, 0.2);
+      }
+
+      .note {
+        font-size: 0.83rem;
+        color: var(--muted);
+      }
+
+      .footer {
+        border-top: 1px solid var(--line);
+        padding: 42px 0 24px;
+        background: #fcfdff;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 18px;
+      }
+
+      .footer h3 {
+        margin: 0 0 10px;
+        color: var(--text);
+        font-size: 1rem;
+      }
+
+      .footer a {
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        color: var(--text);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid var(--line);
+        padding-top: 14px;
+        font-size: 0.84rem;
+      }
+
+      body.dark .topbar {
+        background: linear-gradient(180deg, rgba(11, 18, 32, 0.96) 0%, rgba(15, 23, 42, 0.96) 100%);
+        border-bottom-color: #1e293b;
+      }
+
+      body.dark .nav-links {
+        border-color: #334155;
+        background: linear-gradient(180deg, #0f172a 0%, #111c32 100%);
+      }
+
+      body.dark .nav-links a {
+        color: #cbd5e1;
+      }
+
+      body.dark .nav-links a:hover {
+        color: #f8fafc;
+        background: #1e293b;
+      }
+
+      body.dark .btn-outline {
+        background: #0f172a;
+        border-color: #334155;
+        color: #e2e8f0;
+      }
+
+      body.dark .hamburger {
+        border-color: #334155;
+        background: #0f172a;
+        color: #e2e8f0;
+      }
+
+      body.dark .mobile-menu {
+        background: transparent;
+      }
+
+      body.dark .mobile-menu-backdrop {
+        background: rgba(2, 8, 23, 0.6);
+      }
+
+      body.dark .mobile-menu-panel {
+        background: linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
+        border-color: #334155;
+      }
+
+      body.dark .mobile-menu a {
+        background: linear-gradient(180deg, #0f172a 0%, #111c32 100%);
+        border-color: #1f2f46;
+        color: #dbeafe;
+      }
+
+      body.dark .mobile-menu a:hover {
+        background: #14243f;
+        border-color: #2f4b71;
+        transform: translateX(2px);
+      }
+
+      body.dark .mobile-menu a.mobile-cta {
+        background: #3b82f6;
+        border-color: #3b82f6;
+        color: #ffffff;
+      }
+
+      body.dark .mobile-menu a.mobile-cta::before {
+        background: #2f4b71;
+      }
+
+      body.dark .mobile-menu a.mobile-cta:hover {
+        background: #2563eb;
+        border-color: #2563eb;
+      }
+
+      body.menu-open {
+        overflow: hidden;
+      }
+
+      body.dark .btn-outline:hover {
+        border-color: #475569;
+        background: #111b30;
+      }
+
+      body.dark .btn-primary {
+        background: #3b82f6;
+      }
+
+      body.dark .btn-primary:hover {
+        background: #2563eb;
+      }
+
+      body.dark .card,
+      body.dark .hero-card,
+      body.dark .portfolio-item,
+      body.dark .cta-box,
+      body.dark .footer,
+      body.dark .project-modal-content,
+      body.dark details {
+        background: linear-gradient(180deg, #0f172a 0%, #101a2e 100%);
+        border-color: #243349;
+      }
+
+      body.dark .card:hover,
+      body.dark .portfolio-item:hover {
+        border-color: #334a67;
+        box-shadow: 0 16px 32px rgba(2, 8, 23, 0.55);
+      }
+
+      body.dark .pricing-card.recommended {
+        border-color: #3b82f6;
+        box-shadow: 0 16px 30px rgba(37, 99, 235, 0.25);
+      }
+
+      body.dark .plan-tag,
+      body.dark .eyebrow,
+      body.dark .process-kicker,
+      body.dark .portfolio-kicker,
+      body.dark .logos-label {
+        background: #13213a;
+        border-color: #274266;
+        color: #93c5fd;
+      }
+
+      body.dark .price small,
+      body.dark .portfolio-desc,
+      body.dark .note,
+      body.dark .muted {
+        color: #94a3b8;
+      }
+
+      body.dark .step {
+        border-color: #2b3f5f;
+        background: linear-gradient(180deg, #0f172a 0%, #12203a 100%);
+      }
+
+      body.dark .step:hover {
+        border-color: #3b82f6;
+      }
+
+      body.dark .step::after {
+        background: #12203a;
+        border-color: #2f4b71;
+      }
+
+      body.dark .step-number {
+        border-color: #274266;
+        box-shadow: 0 8px 20px rgba(30, 64, 175, 0.45);
+      }
+
+      body.dark .hero-sub {
+        color: #cbd5e1;
+      }
+
+      body.dark .hero-points li {
+        background: #0b1220;
+        border-color: #2f4565;
+      }
+
+      body.dark .hero-points strong {
+        color: #f1f5f9;
+      }
+
+      body.dark .hero-points span {
+        color: #a8b7cb;
+      }
+
+      body.dark .logos {
+        background: #0f172a;
+        border-color: #243349;
+      }
+
+      body.dark .logos::before {
+        background: linear-gradient(90deg, #0f172a 0%, rgba(15, 23, 42, 0) 100%);
+      }
+
+      body.dark .logos::after {
+        background: linear-gradient(270deg, #0f172a 0%, rgba(15, 23, 42, 0) 100%);
+      }
+
+      body.dark .project-modal-close {
+        background: #0f172a;
+        border-color: #334155;
+        color: #e2e8f0;
+      }
+
+      body.dark .success-modal-card {
+        background: linear-gradient(180deg, #0f172a 0%, #111c32 100%);
+        border-color: #334155;
+      }
+
+      body.dark .input,
+      body.dark select.input,
+      body.dark textarea.input {
+        background: #0b1220;
+        border-color: #334155;
+        color: #e2e8f0;
+      }
+
+      body.dark .input::placeholder {
+        color: #64748b;
+      }
+
+      body.dark .input:focus {
+        border-color: #3b82f6;
+        outline-color: #1e3a8a;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+      }
+
+      body.dark .footer {
+        background: #0b1220;
+      }
+
+      body.dark .footer a {
+        color: #a8b7cb;
+      }
+
+      body.dark .footer a:hover {
+        color: #e2e8f0;
+      }
+
+      body.dark .section-alt {
+        background: #0d1628;
+      }
+
+      body.dark .project-link {
+        color: #93c5fd;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+      }
+
+      .section-alt {
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: #fcfdff;
+      }
+
+      @media (max-width: 980px) {
+        .hero-grid,
+        .cta-box,
+        .grid-3,
+        .process-grid,
+        .portfolio-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .form-grid,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .pricing-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .portfolio-head {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .process-head {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .process-note {
+          text-align: left;
+          max-width: none;
+        }
+
+        .grid-4 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+      }
+
+      @media (max-width: 680px) {
+        .section,
+        .cta {
+          padding: 58px 0;
+        }
+
+        .nav {
+          grid-template-columns: 1fr auto;
+          height: 74px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hamburger {
+          display: inline-flex;
+        }
+
+        .nav-cta {
+          display: none;
+        }
+
+        .grid-4 {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .pricing-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .step::after {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body id="top" class="dark">
+    <header class="topbar">
+      <div class="container nav">
+        <a class="brand" href="./index.html#top">WEB <span>AGENCY</span></a>
+        <nav class="nav-links">
+          <a href="#cum-functioneaza">Cum functioneaza</a>
+          <a href="#pachete">Pachete</a>
+          <a href="#portofoliu">Portofoliu</a>
+          <a href="./despre-noi.html">Despre noi</a>
+        </nav>
+        <div class="top-actions">
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Comuta tema" aria-pressed="false">
+            <span class="theme-toggle-thumb">
+              <span class="icon-moon">🌙</span>
+              <span class="icon-sun">☀️</span>
+            </span>
+          </button>
+          <button id="hamburger" class="hamburger" type="button" aria-label="Meniu" aria-expanded="false">☰</button>
+          <a href="#contact" class="btn btn-primary nav-cta">Programeaza un apel</a>
+        </div>
+      </div>
+    </header>
+    <nav id="mobile-menu" class="mobile-menu" aria-label="Meniu mobil" aria-hidden="true">
+      <div class="mobile-menu-backdrop" data-close-mobile-menu="true"></div>
+      <div class="mobile-menu-panel">
+        <div class="container">
+          <a href="#cum-functioneaza">Cum functioneaza</a>
+          <a href="#de-ce-noi">De ce sa ne alegi</a>
+          <a href="#pachete">Pachete</a>
+          <a href="#portofoliu">Portofoliu</a>
+          <a href="./despre-noi.html">Despre noi</a>
+          <a class="mobile-cta" href="#contact">Programeaza un apel</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-grid">
+          <div>
+            <span class="eyebrow">Web Design pe abonament</span>
+            <h1>Site pentru afacerea ta, fara cost initial</h1>
+            <p class="hero-sub muted">Platesti doar un abonament lunar</p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary">Programeaza un apel gratuit</a>
+              <a href="#pachete" class="btn btn-outline">Vezi pachetele</a>
+            </div>
+          </div>
+
+          <aside class="hero-card">
+            <h3>Ce primesti de la inceput</h3>
+            <ul class="hero-points">
+              <li>
+                <div>
+                  <strong>0 EUR cost initial</strong>
+                  <span>Incepi cu investitie 0 si platesti doar un abonament lunar.</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <strong>Lansare in 5-30 zile</strong>
+                  <span>Termenul de livrare este stabilit in functie de complexitatea proiectului.</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <strong>Mentenanta inclusa</strong>
+                  <span>Actualizari si suport constant, fara grija ca ramai blocat dupa lansare.</span>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <strong>Site usor de extins</strong>
+                  <span>Adaugi pagini, sectiuni sau functionalitati noi pe masura ce cresti.</span>
+                </div>
+              </li>
+            </ul>
+          </aside>
+        </div>
+        <div class="container logos">
+          <span class="logos-label">Client in portofoliu</span>
+          <div class="logos-track">
+            <span>RoofLVL</span><span>•</span><span>RoofLVL</span><span>•</span><span>RoofLVL</span><span>•</span><span>RoofLVL</span><span>•</span><span>RoofLVL</span><span>•</span><span>RoofLVL</span>
+            <span>•</span><span>RoofLVL</span><span>•</span><span>RoofLVL</span><span>•</span><span>RoofLVL</span><span>•</span><span>RoofLVL</span><span>•</span><span>RoofLVL</span><span>•</span><span>RoofLVL</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="cum-functioneaza" class="section section-alt process-section">
+        <div class="container">
+          <div class="process-head">
+            <div>
+              <span class="process-kicker">Proces clar in 6 pasi</span>
+              <h2>Cum functioneaza</h2>
+            </div>
+          </div>
+          <div class="process-grid">
+            <article class="card step">
+              <div class="step-number">1</div>
+              <h3>Cere oferta</h3>
+              <p class="muted">Ne trimiti un mesaj scurt, iar noi revenim rapid cu oferta potrivita pentru proiectul tau.</p>
+            </article>
+            <article class="card step">
+              <div class="step-number">2</div>
+              <h3>Discutie privind nevoile tale</h3>
+              <p class="muted">Stabilim impreuna ce vrei sa obtii, ce stil preferi si ce informatii trebuie sa apara pe site.</p>
+            </article>
+            <article class="card step">
+              <div class="step-number">3</div>
+              <h3>Stabilire termen livrare</h3>
+              <p class="muted">Setam de la inceput un termen clar de livrare, astfel incat sa stii exact cand este gata.</p>
+            </article>
+            <article class="card step">
+              <div class="step-number">4</div>
+              <h3>Acceptare oferta</h3>
+              <p class="muted">Dupa ce confirmi oferta, incepem lucrul imediat conform planului agreat impreuna.</p>
+            </article>
+            <article class="card step">
+              <div class="step-number">5</div>
+              <h3>Testare produs</h3>
+              <p class="muted">Verificam fiecare detaliu important: afisare pe telefon, viteza de incarcare si formularele de contact.</p>
+            </article>
+            <article class="card step">
+              <div class="step-number">6</div>
+              <h3>Livrarea produsului</h3>
+              <p class="muted">Publicam site-ul final si ramai cu suport inclus pentru actualizari si modificari ulterioare.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="de-ce-noi" class="section">
+        <div class="container">
+          <h2>De ce sa ne alegi</h2>
+          <article class="card why-box" style="margin-top: 18px">
+            <p>
+              Vrei un site care sa aduca rezultate, dar fara cost initial mare? Exact asta oferim. Lucram cu antreprenori si companii care vor claritate, viteza si suport constant. Modelul nostru pe abonament iti permite sa incepi rapid, sa pastrezi bugetul pentru crestere si sa ai un partener care se ocupa de implementare cap-coada.
+            </p>
+            <p style="margin-top: 12px">
+              Construim site-uri moderne, usor de folosit, orientate pe lead-uri si conversii. Nu primesti doar design, ci un sistem complet: structura clara, optimizare SEO on-page, integrare Analytics, mentenanta si imbunatatiri continue. Daca ai nevoie de modificari sau functionalitati noi, le facem rapid, fara procese complicate si fara blocaje.
+            </p>
+            <h3 style="margin-top: 18px">Cum te ajutam concret</h3>
+            <ul class="why-steps">
+              <li>Analizam nevoile business-ului tau si propunem o solutie potrivita obiectivelor tale.</li>
+              <li>Stabilim termen clar de livrare si comunicam transparent fiecare etapa a proiectului.</li>
+              <li>Ramanem alaturi de tine dupa lansare, cu suport, optimizare si dezvoltare continua.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="pachete" class="section">
+        <div class="container">
+          <h2>Pachete</h2>
+          <p class="muted" style="margin-bottom: 18px">Alegi ce ti se potriveste acum.</p>
+          <div class="pricing-grid">
+            <article class="card pricing-card" data-package="basic" role="link" tabindex="0" aria-label="Alege pachetul Basic">
+              <div class="plan-row">
+                <span class="plan-tag">Start</span>
+              </div>
+              <h3>Basic</h3>
+              <p class="price">50 EUR<small>/luna</small></p>
+              <ul class="pricing-list">
+                <li>Site de prezentare</li>
+                <li>Mentenanta inclusa</li>
+                <li>Suport standard</li>
+                <li>Setare SEO de baza</li>
+                <li>Integrare formular contact</li>
+                <li>Hosting si monitorizare incluse</li>
+                <li>SSL si securitate de baza</li>
+              </ul>
+              <div class="pricing-cta">Alege Basic →</div>
+            </article>
+
+            <article class="card pricing-card recommended" data-package="premium" role="link" tabindex="0" aria-label="Alege pachetul Premium">
+              <div class="plan-row">
+                <span class="plan-tag">Crestere</span>
+                <span class="badge">Recomandat</span>
+              </div>
+              <h3>Premium</h3>
+              <p class="price">100 EUR<small>/luna</small></p>
+              <ul class="pricing-list">
+                <li>Mai multe pagini</li>
+                <li>Modificari lunare incluse</li>
+                <li>Suport prioritar</li>
+                <li>SEO on-page extins</li>
+                <li>Google Analytics + rapoarte lunare</li>
+                <li>Optimizare performanta</li>
+                <li>Integrare WhatsApp / butoane lead</li>
+                <li>Ajustari pe baza datelor de trafic</li>
+              </ul>
+              <div class="pricing-cta">Alege Premium →</div>
+            </article>
+
+            <article class="card pricing-card" data-package="enterprise" role="link" tabindex="0" aria-label="Alege pachetul Enterprise">
+              <div class="plan-row">
+                <span class="plan-tag">Avansat</span>
+              </div>
+              <h3>Enterprise</h3>
+              <p class="price">200 USD<small>/luna</small></p>
+              <ul class="pricing-list">
+                <li>Tot din pachetul Premium</li>
+                <li>Aplicatii web complexe</li>
+                <li>Fluxuri personalizate (dashboard, conturi, automatizari)</li>
+                <li>Scalare tehnica pentru proiecte mari</li>
+                <li>Consultanta strategica si suport dedicat</li>
+                <li>Integrare API-uri si sisteme externe</li>
+                <li>Plan de dezvoltare pe termen lung</li>
+              </ul>
+              <div class="pricing-cta">Alege Enterprise →</div>
+            </article>
+
+            <article class="card pricing-card" data-package="integral" role="link" tabindex="0" aria-label="Alege pachetul Plata integrala">
+              <div class="plan-row">
+                <span class="plan-tag">One-time</span>
+              </div>
+              <h3>Plata Integrala</h3>
+              <p class="price">de la 500 EUR</p>
+              <ul class="pricing-list">
+                <li>Plata unica, fara abonament lunar</li>
+                <li>Site complet livrat la cheie</li>
+                <li>Design personalizat pe brandul tau</li>
+                <li>SEO on-page + optimizare performanta</li>
+                <li>Training scurt pentru administrare</li>
+                <li>30 zile suport dupa livrare</li>
+              </ul>
+              <div class="pricing-cta">Alege Plata Integrala →</div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="portofoliu" class="section section-alt portfolio-section">
+        <div class="container">
+          <div class="portfolio-head">
+            <div>
+              <span class="portfolio-kicker">Proiect livrat</span>
+              <h2>Portofoliu</h2>
+            </div>
+          </div>
+          <div class="portfolio-grid">
+            <article class="portfolio-item" id="rooflvl-project" role="button" tabindex="0" aria-label="Vezi detalii proiect rooflvl.ro">
+              <img src="./LVL.jpg" alt="rooflvl.ro" />
+              <p>rooflvl.ro</p>
+              <div class="portfolio-meta">
+                <a class="portfolio-link" href="https://www.rooflvl.ro" target="_blank" rel="noopener noreferrer">Viziteaza site-ul: www.rooflvl.ro</a>
+                <div class="portfolio-desc">Magazin online cu structura clara, produse usor de gasit si focus pe cereri rapide.</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <div class="project-modal" id="project-modal" aria-hidden="true">
+        <div class="project-modal-backdrop" data-close-modal="true"></div>
+        <div class="project-modal-content" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+          <button class="project-modal-close" type="button" aria-label="Inchide" data-close-modal="true">×</button>
+          <img class="project-modal-image" src="./LVL.jpg" alt="Preview proiect rooflvl.ro" />
+          <h3 id="project-modal-title">rooflvl.ro - Magazin online pentru materiale de constructii</h3>
+          <p class="muted">Proiect realizat pentru prezentare clara de produse, navigare rapida pe categorii si cresterea cererilor prin formular/telefon.</p>
+          <ul class="project-modal-list">
+            <li>Structura simpla, usor de parcurs pe mobil si desktop.</li>
+            <li>Pagini de produs clare, orientate pe conversie.</li>
+            <li>Implementare SEO on-page si tracking pentru trafic.</li>
+            <li>Design curat, profesional, aliniat cu brandul RoofLVL.</li>
+          </ul>
+          <a class="project-link" href="https://www.rooflvl.ro" target="_blank" rel="noopener noreferrer">Vezi site-ul live: www.rooflvl.ro</a>
+        </div>
+      </div>
+
+      <div class="success-modal" id="success-modal" aria-hidden="true">
+        <div class="success-modal-backdrop" data-close-success="true"></div>
+        <div class="success-modal-card" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
+          <div class="success-check">✓</div>
+          <h3 id="success-modal-title">Mesaj trimis cu succes</h3>
+          <p class="muted">Am primit cererea ta. Revenim rapid cu un raspuns si te contactam in cel mai scurt timp.</p>
+          <button type="button" class="btn btn-primary" data-close-success="true" style="margin-top: 14px">Am inteles</button>
+        </div>
+      </div>
+
+      <section id="contact" class="cta">
+        <div class="container">
+          <div class="cta-box">
+            <div>
+              <span class="eyebrow">Urmatorul pas</span>
+              <h2>Incepe fara cost initial</h2>
+              <p class="muted" style="margin-bottom: 12px">Spune-ne pe scurt ce vrei sa construiesti, iar noi revenim cu oferta potrivita si un plan clar de lucru.</p>
+              <p class="note">Raspuns in aceeasi zi lucratoare • apel gratuit 15 minute</p>
+            </div>
+            <form id="contact-form" class="form" action="#" method="post">
+              <div class="form-grid">
+                <input class="input" type="text" name="nume" placeholder="Nume complet" required />
+                <input class="input" type="text" name="firma" placeholder="Nume firma (optional)" />
+              </div>
+              <div class="form-grid">
+                <input class="input" type="email" name="email" placeholder="Email" required />
+                <input class="input" type="tel" name="telefon" placeholder="Telefon" required />
+              </div>
+              <select class="input" name="pachet" required>
+                <option value="">Pachet dorit</option>
+                <option value="basic">Basic - 50 EUR/luna</option>
+                <option value="premium">Premium - 100 EUR/luna</option>
+                <option value="enterprise">Enterprise - 200 USD/luna</option>
+                <option value="integral">Plata Integrala - de la 500 EUR (fara abonament)</option>
+              </select>
+              <textarea class="input" name="mesaj" rows="4" placeholder="Spune-ne pe scurt ce ai nevoie (tip site, obiectiv, termen)." required></textarea>
+              <button class="btn btn-primary" type="submit">Trimite cererea</button>
+              <p class="note">Prin trimitere, esti de acord sa te contactam pentru oferta.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h3>Web Agency</h3>
+            <p>Site-uri pe abonament pentru firme care vor rezultate fara cost initial mare.</p>
+          </div>
+          <div>
+            <h3>Navigare</h3>
+            <p><a href="#cum-functioneaza">Cum functioneaza</a></p>
+            <p><a href="#pachete">Pachete</a></p>
+            <p><a href="#portofoliu">Portofoliu</a></p>
+          </div>
+          <div>
+            <h3>Contact</h3>
+            <p><a href="mailto:contact@webagency.ro">contact@webagency.ro</a></p>
+            <p><a href="tel:+40785754952">+40 785 754 952</a></p>
+            <p>Romania</p>
+          </div>
+        </div>
+        <div class="footer-bottom">© 2026 Web Agency · Toate drepturile rezervate</div>
+      </div>
+    </footer>
+    <script>
+      const packageCards = document.querySelectorAll(".pricing-card[data-package]");
+      const contactSection = document.querySelector("#contact");
+      const packageSelect = document.querySelector("select[name='pachet']");
+      const contactForm = document.querySelector("#contact-form");
+      const themeToggle = document.querySelector("#theme-toggle");
+      const hamburger = document.querySelector("#hamburger");
+      const mobileMenu = document.querySelector("#mobile-menu");
+      const mobileMenuLinks = document.querySelectorAll("#mobile-menu a");
+      const closeMobileMenuTriggers = document.querySelectorAll("[data-close-mobile-menu='true']");
+      const successModal = document.querySelector("#success-modal");
+      const successCloseTriggers = document.querySelectorAll("[data-close-success='true']");
+
+      function goToContact(packageKey) {
+        if (packageSelect) packageSelect.value = packageKey;
+        if (contactSection) contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      packageCards.forEach((card) => {
+        card.addEventListener("click", () => goToContact(card.dataset.package));
+        card.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            goToContact(card.dataset.package);
+          }
+        });
+      });
+
+      const projectCard = document.querySelector("#rooflvl-project");
+      const projectModal = document.querySelector("#project-modal");
+      const modalCloseTriggers = document.querySelectorAll("[data-close-modal='true']");
+
+      function openProjectModal() {
+        if (!projectModal) return;
+        projectModal.classList.remove("closing");
+        projectModal.classList.add("open");
+        projectModal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeProjectModal() {
+        if (!projectModal) return;
+        if (!projectModal.classList.contains("open")) return;
+        projectModal.classList.add("closing");
+        projectModal.classList.remove("open");
+        window.setTimeout(() => {
+          projectModal.classList.remove("closing");
+          projectModal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }, 200);
+      }
+
+      function openSuccessModal() {
+        if (!successModal) return;
+        successModal.classList.add("open");
+        successModal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("menu-open");
+      }
+
+      function closeSuccessModal() {
+        if (!successModal) return;
+        successModal.classList.remove("open");
+        successModal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("menu-open");
+      }
+
+      if (contactForm) {
+        contactForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          openSuccessModal();
+          contactForm.reset();
+        });
+      }
+
+      if (projectCard) {
+        projectCard.addEventListener("click", openProjectModal);
+        projectCard.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openProjectModal();
+          }
+        });
+      }
+
+      modalCloseTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", closeProjectModal);
+      });
+
+      successCloseTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", closeSuccessModal);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeProjectModal();
+          closeSuccessModal();
+        }
+      });
+
+      function setTheme(theme) {
+        const isDark = theme === "dark";
+        document.body.classList.toggle("dark", isDark);
+        if (themeToggle) themeToggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+      }
+
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark" || savedTheme === "light") {
+        setTheme(savedTheme);
+      } else {
+        setTheme("dark");
+      }
+
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          const nextTheme = document.body.classList.contains("dark") ? "light" : "dark";
+          setTheme(nextTheme);
+          localStorage.setItem("theme", nextTheme);
+        });
+      }
+
+      function closeMobileMenu() {
+        if (!mobileMenu || !hamburger) return;
+        mobileMenu.classList.remove("open");
+        mobileMenu.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("menu-open");
+        hamburger.setAttribute("aria-expanded", "false");
+        hamburger.textContent = "☰";
+      }
+
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener("click", () => {
+          const opened = mobileMenu.classList.toggle("open");
+          mobileMenu.setAttribute("aria-hidden", opened ? "false" : "true");
+          document.body.classList.toggle("menu-open", opened);
+          hamburger.setAttribute("aria-expanded", opened ? "true" : "false");
+          hamburger.textContent = opened ? "✕" : "☰";
+        });
+      }
+
+      mobileMenuLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          closeMobileMenu();
+        });
+      });
+
+      closeMobileMenuTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", closeMobileMenu);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeMobileMenu();
+      });
+    </script>
+  </body>
+</html>

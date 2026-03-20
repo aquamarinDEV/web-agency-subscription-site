@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Despre RoofLVL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --line: #e2e8f0;
+        --card: #f8fafc;
+        --accent: #2563eb;
+      }
+
+      body.dark {
+        --bg: #0b1220;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --line: #1e293b;
+        --card: #0f172a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Jost", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .container {
+        width: min(980px, 92%);
+        margin: 0 auto;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.94);
+        border-bottom: 1px solid var(--line);
+      }
+
+      body.dark .topbar {
+        background: rgba(11, 18, 32, 0.94);
+      }
+
+      .nav {
+        height: 74px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0.3px;
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      .brand span {
+        color: var(--accent);
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn {
+        text-decoration: none;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        border: 1px solid var(--line);
+        color: var(--text);
+        background: var(--card);
+      }
+
+      .btn.primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+
+      .theme-toggle {
+        width: 58px;
+        height: 32px;
+        border: 1px solid #cbd5e1;
+        background: #ffffff;
+        border-radius: 999px;
+        padding: 0;
+        cursor: pointer;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .theme-toggle-thumb {
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+        background: #e2e8f0;
+        border: 1px solid #cbd5e1;
+        margin-left: 3px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        transform: translateX(0);
+        transition: transform 0.22s ease;
+      }
+
+      .theme-toggle .icon-moon {
+        display: inline;
+      }
+
+      .theme-toggle .icon-sun {
+        display: none;
+      }
+
+      body.dark .theme-toggle {
+        border-color: #334155;
+        background: #0f172a;
+      }
+
+      body.dark .theme-toggle-thumb {
+        transform: translateX(26px);
+        background: #1e293b;
+        border-color: #334155;
+      }
+
+      body.dark .theme-toggle .icon-moon {
+        display: none;
+      }
+
+      body.dark .theme-toggle .icon-sun {
+        display: inline;
+      }
+
+      main {
+        padding: 56px 0 80px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      main::before,
+      main::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      main::before {
+        width: 320px;
+        height: 320px;
+        top: -120px;
+        right: -80px;
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.16) 0%, rgba(37, 99, 235, 0) 72%);
+      }
+
+      main::after {
+        width: 260px;
+        height: 260px;
+        bottom: -120px;
+        left: -70px;
+        background: radial-gradient(circle, rgba(148, 163, 184, 0.15) 0%, rgba(148, 163, 184, 0) 72%);
+      }
+
+      main .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      main .container::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        background-image: linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
+        background-size: 26px 26px;
+        mask-image: linear-gradient(to bottom, transparent 0%, #000 20%, #000 80%, transparent 100%);
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .about-card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 28px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+      }
+
+      body.dark .about-card {
+        background: linear-gradient(180deg, #0f172a 0%, #111c32 100%);
+      }
+
+      h1 {
+        margin: 0 0 6px;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+      }
+
+      .subtitle {
+        color: var(--muted);
+        margin-bottom: 20px;
+        font-size: 1.03rem;
+      }
+
+      p {
+        margin: 0 0 14px;
+        line-height: 1.65;
+        color: var(--text);
+      }
+    </style>
+  </head>
+  <body id="top" class="dark">
+    <header class="topbar">
+      <div class="container nav">
+        <a class="brand" href="./index.html#top">WEB <span>AGENCY</span></a>
+        <div class="actions">
+          <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Comuta tema" aria-pressed="false">
+            <span class="theme-toggle-thumb">
+              <span class="icon-moon">🌙</span>
+              <span class="icon-sun">☀️</span>
+            </span>
+          </button>
+          <a class="btn" href="./index.html">Inapoi acasa</a>
+          <a class="btn primary" href="./index.html#contact">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <article class="about-card">
+          <h1>Despre business-ul nostru</h1>
+          <p class="subtitle"><strong>Agentie de web design</strong> specializata in <strong>site-uri pe abonament</strong>, fara cost initial.</p>
+
+          <p>
+            Suntem o agentie care construieste site-uri moderne pentru afaceri care vor <strong>rezultate rapide</strong>, fara sa blocheze buget mare la inceput. Modelul nostru este simplu: incepi cu <strong>investitie 0</strong> si platesti un <strong>abonament lunar</strong>. Ne adresam atat antreprenorilor la inceput de drum, cat si firmelor care au deja clienti si vor sa isi creasca prezenta online intr-un mod clar si eficient.
+          </p>
+
+          <p>
+            Serviciile noastre includ <strong>design web</strong>, dezvoltare pagini de prezentare, magazine online, landing page-uri de conversie, mentenanta, optimizare <strong>SEO on-page</strong>, integrare <strong>Google Analytics</strong> si optimizare continua pe baza datelor reale. Fiecare proiect este gandit sa comunice oferta in primele secunde si sa transforme vizitatorii in <strong>lead-uri</strong> sau clienti.
+          </p>
+
+          <p>
+            Pentru companii care vor ritm mai rapid, oferim <strong>pachete avansate</strong> cu suport prioritar, modificari lunare incluse si dezvoltari personalizate. Avem si varianta de <strong>plata integrala</strong> pentru clientii care prefera livrarea proiectului intr-o singura etapa, fara abonament lunar. In acest mod, fiecare business poate alege formula potrivita in functie de obiective, buget si viteza dorita.
+          </p>
+
+          <p>
+            Procesul nostru de lucru este clar: discutam obiectivele, definim structura site-ului, stabilim termenul de livrare, construim proiectul, testam toate elementele importante si apoi lansam. Dupa lansare, ramanem alaturi de clienti cu <strong>suport</strong>, actualizari si optimizari, astfel incat site-ul sa ramana relevant si performant pe termen lung.
+          </p>
+
+          <p>
+            Credem in <strong>comunicare directa</strong>, design curat si rezultate masurabile. Nu vindem promisiuni vagi, ci implementari concrete care ajuta business-ul sa creasca. Daca vrei un partener care sa se ocupe cap-coada de prezenta ta online, te invitam sa ne scrii. Iti revenim rapid cu o <strong>oferta personalizata</strong> si un plan simplu, usor de urmat, pentru lansare si crestere.
+          </p>
+        </article>
+      </div>
+    </main>
+
+    <script>
+      const themeToggle = document.querySelector("#theme-toggle");
+
+      function setTheme(theme) {
+        const isDark = theme === "dark";
+        document.body.classList.toggle("dark", isDark);
+        if (themeToggle) themeToggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+      }
+
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark" || savedTheme === "light") {
+        setTheme(savedTheme);
+      } else {
+        setTheme("dark");
+      }
+
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          const nextTheme = document.body.classList.contains("dark") ? "light" : "dark";
+          setTheme(nextTheme);
+          localStorage.setItem("theme", nextTheme);
+        });
+      }
+    </script>
+  </body>
+</html>
