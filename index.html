@@ -243,11 +243,21 @@
         display: flex;
       }
 
+      .mobile-menu.closing {
+        display: flex;
+      }
+
       .mobile-menu-backdrop {
         position: absolute;
         inset: 0;
         background: rgba(15, 23, 42, 0.5);
         backdrop-filter: blur(2px);
+        opacity: 0;
+        animation: mobile-backdrop-in 0.22s ease forwards;
+      }
+
+      .mobile-menu.closing .mobile-menu-backdrop {
+        animation: mobile-backdrop-out 0.18s ease forwards;
       }
 
       .mobile-menu-panel {
@@ -258,6 +268,45 @@
         background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
         box-shadow: 0 22px 40px rgba(15, 23, 42, 0.22);
         padding: 14px;
+        opacity: 0;
+        transform: translateY(-12px) scale(0.98);
+        animation: mobile-panel-in 0.24s ease forwards;
+      }
+
+      .mobile-menu.closing .mobile-menu-panel {
+        animation: mobile-panel-out 0.18s ease forwards;
+      }
+
+      @keyframes mobile-backdrop-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes mobile-backdrop-out {
+        from { opacity: 1; }
+        to { opacity: 0; }
+      }
+
+      @keyframes mobile-panel-in {
+        from {
+          opacity: 0;
+          transform: translateY(-12px) scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes mobile-panel-out {
+        from {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-12px) scale(0.98);
+        }
       }
 
       .mobile-menu .container {
@@ -1601,6 +1650,13 @@
           transition: none !important;
           scroll-behavior: auto !important;
         }
+        .mobile-menu.open .mobile-menu-backdrop {
+          opacity: 1;
+        }
+        .mobile-menu.open .mobile-menu-panel {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
       }
 
       .section-alt {
@@ -1624,7 +1680,7 @@
         }
 
         .pricing-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-template-columns: 1fr;
         }
 
         .portfolio-head {
@@ -2148,20 +2204,31 @@
 
       function closeMobileMenu() {
         if (!mobileMenu || !hamburger) return;
+        if (!mobileMenu.classList.contains("open")) return;
+        mobileMenu.classList.add("closing");
         mobileMenu.classList.remove("open");
-        mobileMenu.setAttribute("aria-hidden", "true");
-        document.body.classList.remove("menu-open");
         hamburger.setAttribute("aria-expanded", "false");
         hamburger.textContent = "☰";
+        window.setTimeout(() => {
+          mobileMenu.classList.remove("closing");
+          mobileMenu.setAttribute("aria-hidden", "true");
+          document.body.classList.remove("menu-open");
+        }, 180);
       }
 
       if (hamburger && mobileMenu) {
         hamburger.addEventListener("click", () => {
-          const opened = mobileMenu.classList.toggle("open");
-          mobileMenu.setAttribute("aria-hidden", opened ? "false" : "true");
-          document.body.classList.toggle("menu-open", opened);
-          hamburger.setAttribute("aria-expanded", opened ? "true" : "false");
-          hamburger.textContent = opened ? "✕" : "☰";
+          const isOpen = mobileMenu.classList.contains("open");
+          if (isOpen) {
+            closeMobileMenu();
+          } else {
+            mobileMenu.classList.remove("closing");
+            mobileMenu.classList.add("open");
+            mobileMenu.setAttribute("aria-hidden", "false");
+            document.body.classList.add("menu-open");
+            hamburger.setAttribute("aria-expanded", "true");
+            hamburger.textContent = "✕";
+          }
         });
       }
 
@@ -2176,7 +2243,9 @@
       });
 
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") closeMobileMenu();
+        if (event.key === "Escape") {
+          closeMobileMenu();
+        }
       });
     </script>
   </body>
