@@ -1702,14 +1702,6 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-      }
-
-      @media (max-width: 680px) {
-        .section,
-        .cta {
-          padding: 58px 0;
-        }
-
         .nav {
           grid-template-columns: 1fr auto;
           height: 74px;
@@ -1725,6 +1717,13 @@
 
         .nav-cta {
           display: none;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .section,
+        .cta {
+          padding: 58px 0;
         }
 
         .grid-4 {
@@ -2145,14 +2144,43 @@
       }
 
       if (contactForm) {
-        contactForm.addEventListener("submit", (event) => {
+        contactForm.addEventListener("submit", async (event) => {
           event.preventDefault();
           if (!contactForm.checkValidity()) {
             contactForm.reportValidity();
             return;
           }
-          openSuccessModal();
-          contactForm.reset();
+          const btn = contactForm.querySelector('button[type="submit"]');
+          const origText = btn.textContent;
+          btn.disabled = true;
+          btn.textContent = "Se trimite...";
+          try {
+            const fd = new FormData(contactForm);
+            const r = await fetch("/api/submit", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                nume: fd.get("nume"),
+                firma: fd.get("firma"),
+                email: fd.get("email"),
+                telefon: fd.get("telefon"),
+                pachet: fd.get("pachet"),
+                mesaj: fd.get("mesaj"),
+              }),
+            });
+            const j = await r.json().catch(() => ({}));
+            if (!r.ok) {
+              alert(j.error || "A aparut o eroare. Te rugam incearca din nou.");
+              return;
+            }
+            openSuccessModal();
+            contactForm.reset();
+          } catch (e) {
+            alert("Eroare de conexiune. Verifica internetul si incearca din nou.");
+          } finally {
+            btn.disabled = false;
+            btn.textContent = origText;
+          }
         });
       }
 

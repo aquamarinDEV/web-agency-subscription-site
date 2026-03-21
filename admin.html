@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Inregistrari contact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --line: #e2e8f0;
+        --accent: #2563eb;
+      }
+
+      body.dark {
+        --bg: #0b1220;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --line: #1e293b;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        font-family: "Jost", system-ui, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+
+      .wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 24px 16px;
+      }
+
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+      }
+
+      h1 { margin: 0; font-size: 1.5rem; }
+
+      .btn {
+        border: 1px solid var(--line);
+        background: var(--bg);
+        color: var(--text);
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      .btn.primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+
+      .login-card {
+        max-width: 360px;
+        margin: 48px auto;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 28px;
+      }
+
+      .login-card h2 { margin: 0 0 20px; }
+
+      .input {
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+        font-size: 1rem;
+        font-family: inherit;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .input:focus {
+        outline: 2px solid #93c5fd;
+        border-color: #3b82f6;
+      }
+
+      .err { color: #dc2626; font-size: 0.9rem; margin-bottom: 12px; }
+
+      .sub-table {
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      .sub-table th,
+      .sub-table td {
+        padding: 12px 14px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .sub-table th {
+        background: #f1f5f9;
+        font-weight: 700;
+        font-size: 0.85rem;
+      }
+
+      body.dark .sub-table th {
+        background: #1e293b;
+      }
+
+      .sub-table tr:last-child td { border-bottom: 0; }
+
+      .sub-table .mesaj { max-width: 240px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+      .empty { text-align: center; padding: 48px; color: var(--muted); }
+
+      @media (max-width: 720px) {
+        .sub-table .firma, .sub-table .pachet { display: none; }
+      }
+    </style>
+  </head>
+  <body class="dark">
+    <div class="wrap">
+      <div id="login-view" style="display: none;">
+        <div class="login-card">
+          <h2>Autentificare</h2>
+          <p id="login-err" class="err" style="display: none;"></p>
+          <form id="login-form">
+            <input class="input" type="text" name="username" placeholder="User" required />
+            <input class="input" type="password" name="password" placeholder="Parola" required />
+            <button type="submit" class="btn primary" style="width: 100%; margin-top: 8px;">Intra</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="admin-view" style="display: none;">
+        <div class="top">
+          <h1>Inregistrari contact</h1>
+          <div>
+            <button id="refresh-btn" class="btn">Reimprospatare</button>
+            <a href="/" class="btn" style="margin-left: 8px;">Inapoi</a>
+            <button id="logout-btn" class="btn primary" style="margin-left: 8px;">Iesire</button>
+          </div>
+        </div>
+        <div id="sub-list"></div>
+      </div>
+    </div>
+
+    <script>
+      const API = "";
+      const loginView = document.getElementById("login-view");
+      const adminView = document.getElementById("admin-view");
+      const loginForm = document.getElementById("login-form");
+      const loginErr = document.getElementById("login-err");
+      const subList = document.getElementById("sub-list");
+      const refreshBtn = document.getElementById("refresh-btn");
+      const logoutBtn = document.getElementById("logout-btn");
+
+      function showLogin() {
+        loginView.style.display = "block";
+        adminView.style.display = "none";
+      }
+
+      function showAdmin() {
+        loginView.style.display = "none";
+        adminView.style.display = "block";
+        loadSubmissions();
+      }
+
+      async function loadSubmissions() {
+        const r = await fetch(API + "/api/submissions", { credentials: "include" });
+        if (r.status === 401) {
+          showLogin();
+          return;
+        }
+        if (!r.ok) {
+          subList.innerHTML = "<p class='empty'>Eroare la incarcare.</p>";
+          return;
+        }
+        const data = await r.json();
+        if (!data.length) {
+          subList.innerHTML = "<p class='empty'>Nicio inregistrare inca.</p>";
+          return;
+        }
+        subList.innerHTML = `
+          <table class="sub-table">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Nume</th>
+                <th class="firma">Firma</th>
+                <th>Email</th>
+                <th>Telefon</th>
+                <th class="pachet">Pachet</th>
+                <th class="mesaj">Mesaj</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.map((s) => `
+                <tr>
+                  <td>${new Date(s.createdAt).toLocaleString("ro-RO")}</td>
+                  <td>${escapeHtml(s.nume)}</td>
+                  <td class="firma">${escapeHtml(s.firma || "-")}</td>
+                  <td><a href="mailto:${escapeHtml(s.email)}">${escapeHtml(s.email)}</a></td>
+                  <td><a href="tel:${escapeHtml(s.telefon)}">${escapeHtml(s.telefon)}</a></td>
+                  <td class="pachet">${escapeHtml(s.pachet)}</td>
+                  <td class="mesaj" title="${escapeHtml(s.mesaj)}">${escapeHtml(s.mesaj)}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        `;
+      }
+
+      function escapeHtml(s) {
+        if (!s) return "";
+        const d = document.createElement("div");
+        d.textContent = s;
+        return d.innerHTML;
+      }
+
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        loginErr.style.display = "none";
+        const fd = new FormData(loginForm);
+        const r = await fetch(API + "/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: fd.get("username"),
+            password: fd.get("password"),
+          }),
+          credentials: "include",
+        });
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok) {
+          loginErr.textContent = j.error || "Eroare la autentificare";
+          loginErr.style.display = "block";
+          return;
+        }
+        showAdmin();
+      });
+
+      refreshBtn.addEventListener("click", loadSubmissions);
+
+      logoutBtn.addEventListener("click", async () => {
+        await fetch(API + "/api/logout", { method: "POST", credentials: "include" });
+        showLogin();
+      });
+
+      (async () => {
+        const r = await fetch(API + "/api/submissions", { credentials: "include" });
+        if (r.ok) showAdmin();
+        else showLogin();
+      })();
+    </script>
+  </body>
+</html>

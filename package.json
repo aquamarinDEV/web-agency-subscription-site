@@ -1,0 +1,16 @@
+{
+  "name": "web-agency",
+  "private": true,
+  "dependencies": {
+    "@vercel/kv": "^2.0.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.6",
+    "vercel": "^39.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "vercel dev",
+    "setup-env": "vercel env pull .env.local"
+  }
+}
