@@ -37,17 +37,21 @@
       }
 
       .wrap {
-        max-width: 1000px;
+        max-width: 720px;
         margin: 0 auto;
-        padding: 24px 16px;
+        padding: 28px 20px;
       }
 
       .top {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 24px;
+        gap: 16px;
+        margin-bottom: 28px;
       }
+
+      .top-actions { display: flex; flex-wrap: wrap; gap: 8px; }
 
       h1 { margin: 0; font-size: 1.5rem; }
 
@@ -98,40 +102,96 @@
 
       .err { color: #dc2626; font-size: 0.9rem; margin-bottom: 12px; }
 
-      .sub-table {
-        width: 100%;
-        border-collapse: collapse;
+      .sub-list { display: flex; flex-direction: column; gap: 20px; }
+
+      .sub-card {
+        background: var(--card);
         border: 1px solid var(--line);
-        border-radius: 12px;
+        border-radius: 14px;
         overflow: hidden;
+        transition: box-shadow 0.2s ease;
       }
 
-      .sub-table th,
-      .sub-table td {
-        padding: 12px 14px;
-        text-align: left;
-        border-bottom: 1px solid var(--line);
-      }
+      body:not(.dark) .sub-card { --card: #f8fafc; }
+      body.dark .sub-card { --card: #0f172a; }
 
-      .sub-table th {
+      .sub-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+      body.dark .sub-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+
+      .sub-card-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px 20px;
+        padding: 16px 20px;
         background: #f1f5f9;
+        border-bottom: 1px solid var(--line);
+        font-size: 0.9rem;
+      }
+
+      body.dark .sub-card-header { background: #1e293b; }
+
+      .sub-card-date {
         font-weight: 700;
-        font-size: 0.85rem;
+        color: var(--accent);
+        font-size: 0.95rem;
       }
 
-      body.dark .sub-table th {
-        background: #1e293b;
+      .sub-card-name { font-weight: 700; color: var(--text); }
+
+      .sub-card-pachet {
+        padding: 4px 10px;
+        background: #dbeafe;
+        color: #1d4ed8;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 700;
       }
 
-      .sub-table tr:last-child td { border-bottom: 0; }
+      body.dark .sub-card-pachet { background: #1e3a5f; color: #93c5fd; }
 
-      .sub-table .mesaj { max-width: 240px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .sub-card-body {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px 24px;
+      }
+
+      .sub-field { display: flex; flex-direction: column; gap: 4px; }
+
+      .sub-field-label {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: var(--muted);
+      }
+
+      .sub-field-value {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .sub-field-value a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      .sub-field-value a:hover { text-decoration: underline; }
+
+      .sub-mesaj {
+        grid-column: 1 / -1;
+        padding-top: 12px;
+        border-top: 1px solid var(--line);
+        margin-top: 4px;
+      }
+
+      .sub-mesaj .sub-field-value {
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
 
       .empty { text-align: center; padding: 48px; color: var(--muted); }
-
-      @media (max-width: 720px) {
-        .sub-table .firma, .sub-table .pachet { display: none; }
-      }
     </style>
   </head>
   <body class="dark">
@@ -151,10 +211,10 @@
       <div id="admin-view" style="display: none;">
         <div class="top">
           <h1>Inregistrari contact</h1>
-          <div>
-            <button id="refresh-btn" class="btn">Reimprospatare</button>
-            <a href="/" class="btn" style="margin-left: 8px;">Inapoi</a>
-            <button id="logout-btn" class="btn primary" style="margin-left: 8px;">Iesire</button>
+          <div class="top-actions">
+            <button id="refresh-btn" class="btn">Reîmprospătare</button>
+            <a href="/" class="btn">Înapoi</a>
+            <button id="logout-btn" class="btn primary">Ieșire</button>
           </div>
         </div>
         <div id="sub-list"></div>
@@ -197,34 +257,45 @@
           subList.innerHTML = "<p class='empty'>Nicio inregistrare inca.</p>";
           return;
         }
-        subList.innerHTML = `
-          <table class="sub-table">
-            <thead>
-              <tr>
-                <th>Data</th>
-                <th>Nume</th>
-                <th class="firma">Firma</th>
-                <th>Email</th>
-                <th>Telefon</th>
-                <th class="pachet">Pachet</th>
-                <th class="mesaj">Mesaj</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${data.map((s) => `
-                <tr>
-                  <td>${new Date(s.createdAt).toLocaleString("ro-RO")}</td>
-                  <td>${escapeHtml(s.nume)}</td>
-                  <td class="firma">${escapeHtml(s.firma || "-")}</td>
-                  <td><a href="mailto:${escapeHtml(s.email)}">${escapeHtml(s.email)}</a></td>
-                  <td><a href="tel:${escapeHtml(s.telefon)}">${escapeHtml(s.telefon)}</a></td>
-                  <td class="pachet">${escapeHtml(s.pachet)}</td>
-                  <td class="mesaj" title="${escapeHtml(s.mesaj)}">${escapeHtml(s.mesaj)}</td>
-                </tr>
-              `).join("")}
-            </tbody>
-          </table>
+        subList.innerHTML = data.map((s) => {
+          const d = new Date(s.createdAt);
+          const dataStr = d.toLocaleDateString("ro-RO", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+          });
+          const firmaVal = s.firma && s.firma.trim() ? escapeHtml(s.firma) : "—";
+          return `
+          <article class="sub-card">
+            <div class="sub-card-header">
+              <span class="sub-card-date">${capitalizeFirst(dataStr)}</span>
+              <span class="sub-card-name">${escapeHtml(s.nume)}</span>
+              <span class="sub-card-pachet">${escapeHtml(s.pachet)}</span>
+            </div>
+            <div class="sub-card-body">
+              <div class="sub-field">
+                <span class="sub-field-label">Email</span>
+                <span class="sub-field-value"><a href="mailto:${escapeHtml(s.email)}">${escapeHtml(s.email)}</a></span>
+              </div>
+              <div class="sub-field">
+                <span class="sub-field-label">Telefon</span>
+                <span class="sub-field-value"><a href="tel:${escapeHtml(s.telefon)}">${escapeHtml(s.telefon)}</a></span>
+              </div>
+              <div class="sub-field">
+                <span class="sub-field-label">Firma</span>
+                <span class="sub-field-value">${firmaVal}</span>
+              </div>
+              <div class="sub-mesaj sub-field">
+                <span class="sub-field-label">Mesaj</span>
+                <span class="sub-field-value">${escapeHtml(s.mesaj)}</span>
+              </div>
+            </div>
+          </article>
         `;
+        }).join("");
       }
 
       function escapeHtml(s) {
@@ -232,6 +303,10 @@
         const d = document.createElement("div");
         d.textContent = s;
         return d.innerHTML;
+      }
+
+      function capitalizeFirst(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
       }
 
       loginForm.addEventListener("submit", async (e) => {
